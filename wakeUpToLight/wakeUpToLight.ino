@@ -1,10 +1,13 @@
-int lightsPin = 3;      // LED connected to digital pin 9
+int lightsPin = 12;      // Specify pin gate of FET that drives LED is connected tos
 int curTime = 0;
 int incomingByte = -1;
 unsigned long StartTime = millis();
-unsigned long alarmTime = 30600000;//28800000;   8.5 hours
-unsigned long fadeInTime = 300000;  //5 min fade in time
-string readString;
+float alarm_hours = 9.5;
+float fade_in_mins = 7; // Fade in time takes in effect after alarm turns on
+
+unsigned long alarmTime = alarm_hours * 60 * 60 * 1000;
+unsigned long fadeInTime = fade_in_mins * 60 * 1000;
+String readString;
 
 ;void setup() {
   // put your setup code here, to run once:
@@ -30,6 +33,7 @@ void loop() {
     if (c == '\n') {
       //do stuff
       Serial.println(readString); //prints string to serial port out
+      Serial.println(alarmTime); //prints string to serial port out
       readString=""; //clears variable for new input      
      }  
     else {     
@@ -63,4 +67,3 @@ void loop() {
 
   }
 }
-
